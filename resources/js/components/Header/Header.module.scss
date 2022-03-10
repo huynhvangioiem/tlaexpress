@@ -1,0 +1,53 @@
+#header {
+  height: 75px;
+  align-items: center;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  #btnToggleMenu {
+    text-align: center;
+    svg {
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      background-color: #ee0033;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+  #search {
+    form {
+      border: 1px solid #ccc;
+      width: 80%;
+      border-radius: 5px;
+      input {
+        width: calc(100% - 50px);
+        height: 50px;
+        border-radius: 5px;
+        padding: 5px;
+        border: none;
+        outline: none;
+      }
+      .btn {
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        &:hover{
+          cursor: pointer;
+          
+        }
+      }
+    }
+  }
+  #name {
+    text-align: right;
+  }
+  #avatar {
+    img {
+      width: 75%;
+      max-height: 75%;
+      min-width: 25px;
+    }
+  }
+}

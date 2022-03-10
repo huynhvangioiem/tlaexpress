@@ -1,0 +1,29 @@
+#left.sidebar{
+  border-right: 1px #ccc solid;
+  min-height: 100vh;
+    .menuItems{
+      min-height: 50px;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      background-color: #fbfbfb;
+      transition: all 0.2s ease;
+      &:hover{
+        background-color: #f2f2f2;
+        cursor: pointer;
+      }
+      a{
+        display: block;
+      }
+    }
+    .menuItems#brand{
+      height: 75px;
+      text-align: center;
+      background-color: #fff;
+      img{
+        max-width: 74px;
+      }
+    }
+    .menuItems.active{
+      color: red;
+    }
+}

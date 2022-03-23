@@ -1,0 +1,13 @@
+#container{
+  background-color: #F6FAFC;
+  .login{
+    text-align: center;
+    height: calc(100vh - 100px);
+    min-height: 400px;
+    align-content: center;
+    .title{
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+  }
+}

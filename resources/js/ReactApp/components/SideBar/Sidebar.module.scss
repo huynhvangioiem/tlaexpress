@@ -1,0 +1,36 @@
+.left.sidebar{
+  border-right: 1px #ccc solid;
+  min-height: 100vh;
+  background-color: #fbfbfb;
+    .menuItems{
+      min-height: 50px;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      background-color: #f2f2f2;
+      transition: all 0.2s ease;
+      &:hover{
+        background-color: #c2c2c2;
+        cursor: pointer;
+      }
+      a{
+        display: block;
+      }
+      .icon{
+        text-align: center;
+      }
+    }
+    .menuItems.brand{
+      height: 75px;
+      text-align: center;
+      background-color: #fff;
+      img{
+        max-width: 74px;
+        width: 100%;
+      }
+    }
+    .menuItems.active{
+      color: red;
+      border-left: 1px solid red;
+      border-right: 1px solid red;
+    }
+}

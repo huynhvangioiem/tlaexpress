@@ -18,15 +18,15 @@ class LoginController extends Controller
             $user = Auth::user();
             $tokenResult = $user->createToken('your-password');
             return response()->json([
-                "success" => [
+                "data" => [
                     'token' => $tokenResult->accessToken,
                     'user' => $user->user_name,
                 ]
             ]);
         } else {
             return response()->json([
-                'error' => 'Unauthorised'
-            ]);    
+                "error" => 'Thông tin đăng nhập không đúng. Vui lòng thử lại!'
+            ],234);    
         }
     }
 }

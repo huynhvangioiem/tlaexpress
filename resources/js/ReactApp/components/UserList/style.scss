@@ -1,0 +1,23 @@
+.rdt_Table {
+  .rdt_TableHead {
+    .rdt_TableHeadRow {
+      border-bottom: 1px solid red;
+      background-color: #ea6153;
+      color: #fff;
+      font-weight: bold;
+      .rdt_TableCol {
+      }
+    }
+  }
+  .rdt_TableBody {
+  }
+}
+.rdt_Pagination {
+  border-top: none !important;
+}
+#filterByName {
+  height: 35px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}

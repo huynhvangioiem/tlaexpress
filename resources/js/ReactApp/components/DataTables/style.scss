@@ -1,0 +1,50 @@
+.dataTable-container {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  .dataTables {
+    min-width: 100%;
+    border-spacing: unset;
+    .dtHeaderRow {
+      .dtHeader {
+        border-bottom: 1px solid red;
+        background-color: #ea6153;
+        color: #fff;
+        font-weight: bold;
+        height: 35px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+    .dtTableRow {
+      .dtTableCell {
+        border-bottom: 1px solid #e5e5e5;
+        height: 35px;
+        padding: 5px;
+        &.actionCell{
+          .btn:not(:last-child){
+            margin-right: 5px;
+          }
+        }
+      }
+      &:nth-child(even){
+        background-color: #f9f9f9;
+      }
+      &:hover{
+        background-color: #f6f6f6;
+      }
+      .btn{
+        height: 30px;
+        padding: 5px 10px;
+      }
+    }
+    .alignCenter{
+      text-align: center;
+    }
+    .alignRight{
+      text-align: right;
+    }
+    
+
+  }
+}

@@ -21,7 +21,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    
+
     protected $fillable = [
         'user_name',
         'password',
@@ -44,8 +44,8 @@ class User extends Authenticatable
      */
 
     //  ralationship
-    public function nhanvien (){
-        return $this->hasOne(NhanVien::class,"user_name");
+    public function nhanvien()
+    {
+        return $this->hasOne(NhanVien::class, "user_name");
     }
-
 }

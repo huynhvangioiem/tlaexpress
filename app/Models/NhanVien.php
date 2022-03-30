@@ -12,10 +12,15 @@ class NhanVien extends Model
     public $primaryKey = 'nv_id ';
 
     protected $hidden = [
-        'user_name',
+        // 'user_name',
     ];
     //  ralationship
-    public function user(){
-        return $this->belongsTo(User::class,"user_name");
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_name");
+    }
+    public function diemgd()
+    {
+        return $this->belongsTo(DiemGD::class, "dgd_id");
     }
 }

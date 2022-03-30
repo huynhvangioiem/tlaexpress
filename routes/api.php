@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiemGDController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NhanVienController;
 use Illuminate\Http\Request;
@@ -17,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //login
-Route::post("login",[LoginController::class,'login']);
-Route::apiResource("user",NhanVienController::class)->middleware('auth:api');
+Route::post("auth/login",[LoginController::class,'login'])->name("login");
+Route::apiResource("diemgd",DiemGDController::class)->middleware('auth:api');
+// Route::get("user",[NhanVienController::class,'index'])->middleware('auth:api');

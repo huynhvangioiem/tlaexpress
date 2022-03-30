@@ -1,23 +1,16 @@
 import * as types from '../contants/auth'
 
-export const login = (email, password) => ({
+export const login = (accountInfo) => ({
   type: types.LOGIN,
-  payload: {
-    email,
-    password
-  }
+  payload: accountInfo
 });
 
 export const loginSuccess = data => ({
   type: types.LOGIN_SUCCESS,
-  payload: {
-    data
-  }
+  payload: data
 });
 
 export const loginFailed = error => ({
   type: types.LOGIN_FAILED,
-  payload: {
-    error
-  }
+  payload: error
 });

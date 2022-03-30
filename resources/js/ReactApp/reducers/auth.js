@@ -1,5 +1,5 @@
 import * as types from '../contants/auth';
-import { toastError, toastSuccess } from '../Helper/toastHelper'
+import { toastError, toastSuccess } from '../Helper/toastHelper';
 const initialState = {};
 
 const authReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case types.LOGIN_FAILED: {
-      const { error } = action.payload;
+      const error  = action.payload;
       toastError(error);
       return {
         ...state
@@ -25,5 +25,5 @@ const authReducer = (state = initialState, action) => {
       default:
         return state;
   }
-}
+};
 export default authReducer;

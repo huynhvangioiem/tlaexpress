@@ -1,10 +1,12 @@
-import clsx from 'clsx'
 import React, { useState } from 'react'
-import callApi from '../../config/apiCaller';
+import { connect } from 'react-redux';
+import {useNavigate } from 'react-router-dom';
+import clsx from 'clsx'
+
 import { clearValidate, Required, Validator } from '../../config/Validator';
 import Footer from '../../components/Footer'
-import style from './Login.module.scss'
-import { useLocation, useNavigate } from 'react-router-dom';
+import style from './Login.module.scss';
+import {login} from '../../actions/auth'
 
 
 const Login = (props) => {
@@ -26,15 +28,7 @@ const Login = (props) => {
       "password": password
     }
     if (Validator(validateDatas)) {
-      callApi("login", "POST", user).then(res => {
-        if (res.data.success) {
-          sessionStorage.setItem('userLogined', JSON.stringify(res.data.success));
-          alert('Đăng nhập thành công.');
-          navigate(-1);
-        } else {
-          alert('Thông tin đăng nhập không đúng. Vui lòng thử lại!');
-        }
-      });
+      props.onLogin(user);
     }
   }
   return (
@@ -73,17 +67,15 @@ const Login = (props) => {
   )
 }
 
-// const mapStateToProps = state => {
-//   return {
-//       userLogined : state.loginReducer
-//   }
-// }
-// const mapDispatchToProps = (dispatch, props) => {
-//   return {
-//     onLogin: (user) => {
-//       dispatch(actLoginRequest(user));
-//     },
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
-export default Login;
+const mapStateToProps = state => {
+  return {
+  }
+}
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onLogin: (user) => {
+      dispatch(login(user));
+    },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

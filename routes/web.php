@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RenderSpaView;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +13,6 @@ use App\Http\Controllers\RenderSpaView;
 |
 */
 
-Route::get('{path?}', RenderSpaView::class)->where('path', '[a-zA-Z0-9-/]+');
+Route::get('{path?}', function (){
+  return view('spa-view');
+})->where('path', '[a-zA-Z0-9-/]+');

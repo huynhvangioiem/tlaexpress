@@ -68,6 +68,7 @@ class NhanVienController extends Controller
         $nhanvien->nv_sdt = $request->nv_sdt;
         $nhanvien->nv_ngaysinh = $request->nv_ngaysinh;
         $nhanvien->nv_chucvu = $request->nv_chucvu;
+        $nhanvien->dgd_id = $request->dgd_id;
 
         $user = User::find($request->user_name);
         $user->nhanvien()->save($nhanvien);

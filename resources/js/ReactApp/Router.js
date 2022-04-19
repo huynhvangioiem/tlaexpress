@@ -8,6 +8,10 @@ import ListUser from './page/ListUser'
 import QLDiemGd from './page/QLDiemGd'
 import QLUser from './page/QLUser'
 import AddDiemGD from './page/AddDiemGD'
+import QLVanDon from './page/QLVanDon'
+import AddDonHang from './page/AddDonHang'
+import ListDonHang from './page/ListDonHang'
+import ChiTietDonHang from './page/ChiTietDonHang'
 
 export default function Router() {
   return (
@@ -23,6 +27,12 @@ export default function Router() {
         <Route index element={<ListDiemGD />} />
         <Route path="them-diem-giao-dich" element={<AddDiemGD />} />
         <Route path="danh-sach-diem-giao-dich" element={<ListDiemGD />} />
+      </Route>
+      <Route path="/quan-ly-van-don/*" element={<QLVanDon/>}>
+        <Route index element={<ListDonHang />} />
+        <Route path="tao-don-hang" element={<AddDonHang />} />
+        <Route path="danh-sach-don-hang" element={<ListDonHang />} />
+        <Route path="chi-tiet-don-hang" element={<ChiTietDonHang />} />
       </Route>
       <Route path="*" element={<Notfound />} />
     </Routes>

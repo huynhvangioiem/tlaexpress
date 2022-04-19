@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {useNavigate } from 'react-router-dom';
 import clsx from 'clsx'
 
@@ -14,27 +14,28 @@ const Login = (props) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validateDatas = [
     { "objName": "#userName", "rules": [{ "func": Required }] },
     { "objName": "#password", "rules": [{ "func": Required }] },
   ]
 
-  const login = (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
     let user = {
       "user_name": userName,
       "password": password
     }
     if (Validator(validateDatas)) {
-      props.onLogin(user);
+      dispatch(login(user));
     }
   }
   return (
 
     <div className="container" id={style.container}>
-      <form className="formLogin" method="POST" action="" id="formLogin" onSubmit={e => login(e)}>
+      <form className="formLogin" method="POST" action="" id="formLogin" onSubmit={e => onLogin(e)}>
         <div className={clsx("row", style.login)}>
           <div className="col-12 col-m-12 col-s-12"><h1 className={style.title}>Đăng Nhập</h1></div>
           <div className="col-12 col-m-12 col-s-12">
@@ -67,15 +68,4 @@ const Login = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-  }
-}
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onLogin: (user) => {
-      dispatch(login(user));
-    },
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

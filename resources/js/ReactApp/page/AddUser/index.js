@@ -1,32 +1,34 @@
 import clsx from 'clsx'
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, editUser, onCancleEdit } from '../../actions/user';
+import FormEditUser from '../../components/FormEditUser';
 // import { actAddUserRequest } from '../../actions';
 
 import FormUser from '../../components/FormUser'
 
 const AddUser = (props) => {
 
+  const userEditting = useSelector(state => state.userEditting);
+  const dispatch = useDispatch();
 
   const handleSubmit = (userInfo) => {
+    dispatch(addUser(userInfo));
   }
-
-
+  const handleCancleEdit = () => {
+    dispatch(onCancleEdit());
+  }
+  const handleEdit = (userData, id) => {
+    dispatch(editUser(userData, id));
+  }
 
   return (
     <div className={clsx("col-9 col-m-9 col-s-12")}>
-      <FormUser onSubmit={handleSubmit} />
+      { _.isEmpty(userEditting) ? <FormUser onSubmit={handleSubmit} /> :  <FormEditUser edit={handleEdit} cancleEdit={handleCancleEdit} userData={userEditting} onSubmit={handleSubmit} />}
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-  }
-}
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
+
+export default AddUser;

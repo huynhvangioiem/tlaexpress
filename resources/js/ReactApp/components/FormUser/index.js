@@ -1,19 +1,23 @@
 import clsx from 'clsx'
-import { max } from 'lodash';
+import _ from 'lodash';
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { clearValidate, Comfirm, Max, Password, Phonenumber, Required, Validator } from '../../config/Validator';
 
 import style from './style.module.scss'
 
 export default function FormUser(props) {
 
+  const { onSubmit } = props;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('')
   const [checkPass, setCheckPass] = useState('');
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [job, setJob] = useState('');
+  const [place, setPlace] = useState('');
   const [dob, setDob] = useState('');
+  const diemgds = useSelector(state => state.diemgd);
 
 
 
@@ -24,8 +28,16 @@ export default function FormUser(props) {
     { "objName": "#fullName", "rules": [{ "func": Required }, { "func": Max, checkValue: 50 }] },
     { "objName": "#phone", "rules": [{ "func": Required }, { "func": Phonenumber }] },
     { "objName": "#job", "rules": [{ "func": Required }] },
+    { "objName": "#place", "rules": [{ "func": Required }] },
     { "objName": "#dob", "rules": [{ "func": Required }] },
   ]
+
+  const showPlaces = (places) => {
+    var results = places.map((place, index) => (<option key={index} value={place.dgd_id}>{place.dgd_ten}</option>))
+    return (
+      <>{results}</>
+    )
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,16 +50,25 @@ export default function FormUser(props) {
         "nv_ten": fullName,
         "nv_sdt": phone,
         "nv_ngaysinh": dob,
-        "nv_chucvu": job
+        "nv_chucvu": job,
+        "dgd_id": place
       };
-      //submit data to Page Add
-      props.onSubmit(newUserInfo);
+      onSubmit(newUserInfo);
     }
   }
-
+  const handleReset = () => {
+    setUserName('');
+    setPassword('');
+    setCheckPass('');
+    setFullName('');
+    setPhone('');
+    setJob('');
+    setPlace('');
+    setDob('');
+  }
   return (
     <div className={clsx("container-fluid", style.content)}>
-      <form action="" method="POST" role="form" onSubmit={e => handleSubmit(e)}>
+      <form action="" method="POST" role="form" onReset={e => handleReset()} onSubmit={e => handleSubmit(e)}>
         <div className={clsx("row")}>
           <div className={clsx("col-12 col-m-12 col-s-12 formTitle", style.title)}>Thông tin tài khoản</div>
         </div>
@@ -130,13 +151,28 @@ export default function FormUser(props) {
           <div className="col-12 col-m-12 col-s-12 form-message"></div>
         </div>
         <div className="row form-group">
+          <div className="col-12 col-m-12 col-s-12 formName"><label htmlFor="place">Nơi làm việc:</label></div>
+          <div className="col-12 col-m-12 col-s-12">
+            <select name="place" id="place" className="form-control"
+              value={place}
+              onChange={e => setPlace(e.target.value)}
+              onInput={e => clearValidate("#place")}
+              onBlur={e => Validator([validateDatas[6]])}
+            >
+              <option value="">Vui lòng chọn nơi làm việc</option>
+              {showPlaces(diemgds)}
+            </select>
+          </div>
+          <div className="col-12 col-m-12 col-s-12 form-message"></div>
+        </div>
+        <div className="row form-group">
           <div className="col-12 col-m-12 col-s-12 formName"><label htmlFor="dob">Ngày sinh:</label></div>
           <div className="col-12 col-m-12 col-s-12">
             <input type="date" className="form-control" name="dob" id="dob" placeholder=""
               value={dob}
               onChange={e => setDob(e.target.value)}
               onInput={e => clearValidate("#dob")}
-              onBlur={e => Validator([validateDatas[6]])}
+              onBlur={e => Validator([validateDatas[7]])}
             />
           </div>
           <div className="col-12 col-m-12 col-s-12 form-message"></div>

@@ -6,7 +6,7 @@ import DataTables from '../DataTables';
 
 const DiemGDList = (props) => {
   const data = props.children;
-  const {edit, del} = props;
+  const { edit, del } = props;
 
   const handleEdit = (id) => {
     edit(id);
@@ -45,13 +45,11 @@ const DiemGDList = (props) => {
         </>
       ),
       textAlign: "center",
-      minWidth : "150px",
+      minWidth: "150px",
     },
   ]
   return (
-    <>
-      <DataTables dataTables={data} columns={columns} />
-    </>
+    <DataTables dataTables={data} columns={columns} idKey="dgd_id" />
   );
 }
 

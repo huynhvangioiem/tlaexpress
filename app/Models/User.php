@@ -48,4 +48,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(NhanVien::class, "user_name");
     }
+    public function donHang()
+    {
+        return $this->hasMany(DonHang::class, "dh_nguoitao");
+    }
+    public function giaoHang()
+    {
+        return $this->hasMany(GiaoHang::class, "gh_nguoigiao");
+    }
+    public function phieuXuat()
+    {
+        return $this->hasMany(PhieuXuat::class, "px_id");
+    }
 }

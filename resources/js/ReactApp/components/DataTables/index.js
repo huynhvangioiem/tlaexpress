@@ -1,14 +1,14 @@
 import React from 'react';
 import './style.scss';
 
-const DataTables = ({dataTables, columns}) => {
+export default function DataTables ({dataTables, columns, idKey}) {
   return (
     <div className="dataTable-container">
       <table className="dataTables">
         <thead>
           <tr className="dtHeaderRow"><ShowHeader>{columns}</ShowHeader></tr>
         </thead>
-        <tbody><ShowData columns={columns}>{dataTables}</ShowData></tbody>
+        <tbody><ShowData columns={columns} idKey={idKey}>{dataTables}</ShowData></tbody>
       </table>
     </div>
   )
@@ -23,7 +23,7 @@ const ShowHeader = (props) => {
   )
 }
 
-const Cell = ({ column, record }) => {
+const Cell = ({ column, record, idKey }) => {
   var key = column.key
   var style = {
     textAlign: column.textAlign ? column.textAlign : "",
@@ -34,16 +34,15 @@ const Cell = ({ column, record }) => {
     return (<td style={style} className="dtTableCell">{record[key]}</td>)
   }else{
     var action = column.Content;
-    return (<td style={style} className="dtTableCell actionCell">{action(record.dgd_id)}</td>)
+    return (<td style={style} className="dtTableCell actionCell">{action(record[idKey])}</td>)
   }
 }
-const Record = ({ columns, recordData }) => {
-  var result = columns.map((column, index) => (<Cell key={index} column={column} record={recordData} />))
+const Record = ({ columns, recordData, idKey }) => {
+  var result = columns.map((column, index) => (<Cell key={index} column={column} idKey={idKey} record={recordData} />))
   return (<tr className="dtTableRow">{result}</tr>);
 }
-const ShowData = ({ columns, children }) => {
+const ShowData = ({ columns, children, idKey }) => {
   var datas = children;
-  var result = datas.map((record, index) => (<Record key={index} columns={columns} recordData={record} />))
+  var result = datas.map((record, index) => (<Record key={index} columns={columns} idKey={idKey} recordData={record} />))
   return (<>{result}</>);
 }
-export default DataTables;

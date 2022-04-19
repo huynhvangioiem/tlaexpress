@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { getUser } from '../../actions/user';
 import MenuQLUser from '../../components/MenuQLUser';
 // import { actGetUsersRequest } from '../../actions';
 
@@ -9,9 +10,12 @@ import MenuQLUser from '../../components/MenuQLUser';
 import style from './QLUser.module.scss';
 
 const QLUser = (props) => {
-  useEffect(()=>{
-    // props.getUsers();
-  },[])
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getUser());
+  }, [])
   return (
     <div className={clsx("row", style.mainContent)}>
       <div className={clsx("col-12 col-m-12 col-s-12", style.title)}>Quản lý người dùng</div>
@@ -21,13 +25,5 @@ const QLUser = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-  }
-}
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-   
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(QLUser)
+
+export default QLUser

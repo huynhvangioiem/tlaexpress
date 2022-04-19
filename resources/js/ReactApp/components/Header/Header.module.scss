@@ -3,6 +3,7 @@
   align-items: center;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   position: relative;
+  padding-right: 1%;
   .btnToggleMenu {
     text-align: center;
     svg {
@@ -48,10 +49,35 @@
     text-align: right;
   }
   .avatar {
+    position: relative;
+    text-align: center;
+    &:hover > .acountMenu {
+      display: block;
+    }
     img {
-      width: 75%;
-      max-height: 75%;
+      width: 50%;
+      max-width: 50px;
       min-width: 25px;
+      
+    }
+  }
+  .acountMenu{
+    position: absolute;
+    display: none;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 2px #fff;
+    .item{
+      padding: 10px 5px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+      &:hover{
+        cursor: pointer;
+        color: red;
+      }
     }
   }
 }

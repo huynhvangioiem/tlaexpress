@@ -1,0 +1,22 @@
+.content{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding-bottom: 15px;
+  .title{
+    background-color: #F7F7F7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .subTitle{
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .action{
+    button:not(:last-child){
+      margin-right: 15px;
+    }
+  }
+}

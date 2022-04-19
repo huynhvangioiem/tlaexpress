@@ -45,7 +45,7 @@ export default function FormDiemGD(props) {
     }
   }
 
-  const handleReset = (e) => {
+  const handleReset = () => {
     if(!_.isEmpty(dgdEditting)){
       onCancleEdit();
       navigate(-1);
@@ -70,11 +70,12 @@ export default function FormDiemGD(props) {
       document.getElementById("btnSubmit").innerText = "Cập nhật";
       document.getElementById("btnReset").innerText = "Hủy";
     }
+    return () => onCancleEdit();
   },[])
 
   return (
     <div className={clsx("container-fluid", style.content)}>
-      <form action="" method="POST" role="form" onReset={e => handleReset(e)} onSubmit={e => handleSubmit(e)}>
+      <form action="" method="POST" role="form" onReset={e => handleReset()} onSubmit={e => handleSubmit(e)}>
         <div className={clsx("row")}>
           <div id="formTitle" className={clsx("col-12 col-m-12 col-s-12 formTitle", style.title)}>Thông tin điểm giao dịch</div>
         </div>

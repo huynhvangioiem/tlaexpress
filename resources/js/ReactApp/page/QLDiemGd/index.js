@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { getDiemGDs } from '../../actions/diemgd';
 
@@ -8,10 +8,10 @@ import MenuQLDiemGD from '../../components/MenuQLDiemGD';
 import style from './style.module.scss';
 
 const  QLDiemGd = (props) => {
-  
+  const dispatch = useDispatch();
   useEffect(() => {
     //get list of DiemGD
-    props.onGetDiemGDs();
+    // dispatch(getDiemGDs())
   },[]);
 
   return (
@@ -22,13 +22,5 @@ const  QLDiemGd = (props) => {
     </div>
   )
 }
-const mapStateToProps = state => {
-  return {
-  }
-}
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onGetDiemGDs: () => dispatch(getDiemGDs())
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(QLDiemGd)
+
+export default QLDiemGd;

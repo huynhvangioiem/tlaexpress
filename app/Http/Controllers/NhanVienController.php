@@ -17,9 +17,10 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $nhanvien = NhanVien::with('user:user_name,user_status')->get();
+        $ralationship = array("user:user_status,user_name", "diemgd:dgd_ten,dgd_id");
+        $nhanvien = NhanVien::with($ralationship)->get();
         return response()->json([
-            "success" => $nhanvien,
+            "success" => $nhanvien
         ]);
     }
 
@@ -50,6 +51,21 @@ class NhanVienController extends Controller
                 'nv_sdt' => 'required|max:10',
                 'nv_ngaysinh' => 'required',
                 'nv_chucvu' => 'required|max:1',
+                'dgd_id' => 'required|max:1',
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không được lớn hơn :max',
+                'unique' => ':attribute đã tồn tại',
+            ],
+            [
+                'user_name' => 'Tên tài khoản',
+                'password' => 'Mật khẩu',
+                'nv_ten' => 'Tên nhân viên',
+                'nv_sdt' => 'Số điện thoại',
+                'nv_ngaysinh' => 'Ngày sinh',
+                'nv_chucvu' => 'Chức vụ',
+                'dgd_id' => 'Nơi làm việc',
             ]
         );
         if ($validator->fails()) {
@@ -70,11 +86,14 @@ class NhanVienController extends Controller
         $nhanvien->nv_chucvu = $request->nv_chucvu;
         $nhanvien->dgd_id = $request->dgd_id;
 
-        $user = User::find($request->user_name);
+        // $user = User::find($request->user_name);
         $user->nhanvien()->save($nhanvien);
+
+        $ralationship = array("user:user_status,user_name", "diemgd:dgd_ten,dgd_id");
+        $result = NhanVien::with($ralationship)->where('user_name', $user->user_name)->get();
         return response()->json([
-            "success" => $nhanvien,
-        ]);
+            "success" => $result,
+        ], 201);
     }
 
     /**
@@ -108,7 +127,57 @@ class NhanVienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nv_ten' => 'max:50',
+                'nv_sdt' => 'max:10',
+                'nv_ngaysinh' => 'date_format:"Y-m-d"',
+                'nv_chucvu' => 'integer',
+                'dgd_id' => 'integer',
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không được lớn hơn :max',
+                'unique' => ':attribute đã tồn tại',
+                'date_format' => ':attribute không đúng định dạng (Y-m-d)',
+                'integer' => ':attribute phải là số nguyên',
+            ],
+            [
+                'nv_ten' => 'Tên nhân viên',
+                'nv_sdt' => 'Số điện thoại',
+                'nv_ngaysinh' => 'Ngày sinh',
+                'nv_chucvu' => 'Chức vụ',
+                'dgd_id' => 'Nơi làm việc',
+            ]
+        );
+        if($request->user_name||$request->password){
+            return response()->json([
+                'error' => "Không thể thay đổi mật khẩu và tên đăng nhập"
+            ]);
+        }
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ]);
+        }
+        $nhanvien = NhanVien::find($id);
+        if (!$nhanvien) {
+            return response()->json([
+                'error' => "Không tìm thấy thông tin tài khoản cần cập nhật."
+            ]);
+        };
+        if ($request->nv_ten) $nhanvien->nv_ten = $request->nv_ten;
+        if ($request->nv_sdt) $nhanvien->nv_sdt = $request->nv_sdt;
+        if ($request->nv_ngaysinh) $nhanvien->nv_ngaysinh = $request->nv_ngaysinh;
+        if ($request->nv_chucvu) $nhanvien->nv_chucvu = $request->nv_chucvu;
+        if ($request->dgd_id) $nhanvien->dgd_id = $request->dgd_id;
+        $nhanvien->save();
+        $ralationship = array("user:user_status,user_name", "diemgd:dgd_ten,dgd_id");
+        $result = NhanVien::with($ralationship)->where('nv_id', $id)->get();
+        return response()->json([
+            "success" => $result,
+        ]);
     }
 
     /**
@@ -119,6 +188,8 @@ class NhanVienController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nhanvien = NhanVien::find($id);
+        NhanVien::destroy($id);
+        User::destroy($nhanvien->user_name);
     }
 }

@@ -23,4 +23,16 @@ class DiemGD extends Model
     {
         return $this->hasMany(NhanVien::class, "dgd_id");
     }
+    public function phieuXuat()
+    {
+        return $this->hasMany(PhieuXuat::class, "px_diemden");
+    }
+    public function lichTrinh()
+    {
+        return $this->hasMany(LichTrinh::class, "dgd_id");
+    }
+    public function donHang()
+    {
+        return $this->hasMany(DonHang::class, "dh_khophat");
+    }
 }

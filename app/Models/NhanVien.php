@@ -9,7 +9,8 @@ class NhanVien extends Model
 {
     use HasFactory;
     protected $table = 'nhanvien';
-    public $primaryKey = 'nv_id ';
+    public $primaryKey = 'nv_id';
+
 
     protected $hidden = [
         // 'user_name',

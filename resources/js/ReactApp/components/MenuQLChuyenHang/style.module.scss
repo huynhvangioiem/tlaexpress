@@ -1,0 +1,25 @@
+.tabAction {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  .tabItem {
+    min-height: 50px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    transition: all 0.2s ease;
+    .icon {
+      text-align: center;
+    }
+    &:hover {
+      cursor: pointer;
+      color: red;
+      border-left: 1px solid red;
+      border-right: 1px solid red;
+    }
+    &.active {
+      color: red;
+      border-left: 1px solid red;
+      border-right: 1px solid red;
+    }
+  }
+}

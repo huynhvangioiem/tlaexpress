@@ -14,10 +14,10 @@ export const addDonHang = (data) => {
 export const getDonHang = (id) => {
   return axiosService.getApi(`${API_ENDPOINT}/${url}/${id}`);
 }
-// export const editDiemGD = (data, id) => {
-//   return axiosService.putApi(`${API_ENDPOINT}/${url}/${id}`,data);
-// }
+export const editDonHang = (data, id) => {
+  return axiosService.putApi(`${API_ENDPOINT}/${url}/${id}`,data);
+}
 
-// export const deleteDiemGD = (id) => {
-//   return axiosService.deleteApi(`${API_ENDPOINT}/${url}/${id}`);
-// }
+export const deleteDonHang = (id) => {
+  return axiosService.deleteApi(`${API_ENDPOINT}/${url}/${id}`);
+}

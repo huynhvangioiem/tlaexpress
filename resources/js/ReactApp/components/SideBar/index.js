@@ -11,12 +11,12 @@ export default function Sidebar() {
   const Menus = [
     'Trang chủ',
     'Quản lý vận đơn',
+    'Quản lý xuất kho',
+    'Quản lý nhập kho',
+    'Quản lý chuyến hàng',
     'Quản lý người dùng',
     'Quản lý điểm giao dịch',
-    'Quản lý khách hàng',
-    'Quản lý đối soát',
     'Thống kê',
-    'Cài đặt'
   ]
   return (
     <div className={clsx("col-2 col-m-1 col-s-0",style.sidebar,style.left)} id="left">

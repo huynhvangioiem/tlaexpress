@@ -260,6 +260,12 @@ class DonHangController extends Controller
      */
     public function destroy($id)
     {
+        $donHang = DonHang::find($id);
+        if($donHang->dh_trangthai != 1){
+            return response()->json([
+                "error" => "Không thể xóa đơn hàng này!",
+            ]);
+        }
         LichSuDonHang::where('dh_id', $id)->delete();
         DonHang::destroy($id);
     }

@@ -14,6 +14,7 @@ import { getUser } from './actions/user';
 import _ from 'lodash';
 import { AUTHORIZATION } from './contants';
 import { logout } from './actions/auth';
+import { getChuyenHangs } from './actions/chuyenHang';
 
 
 export default function App() {
@@ -22,9 +23,9 @@ export default function App() {
   const [userLogin, setuserLogin] = useState({});
 
   useEffect(() => {
-    //get list of DiemGD
     dispatch(getUser());
     dispatch(getDiemGDs())
+    dispatch(getChuyenHangs());
     setuserLogin(loginData)
   },[]);
 

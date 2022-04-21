@@ -11,6 +11,11 @@ class ChuyenHang extends Model
     protected $table = 'chuyenhang';
     public $primaryKey = 'ch_id';
 
+    protected $fillable = [
+        'ch_tentaixe',
+        'ch_bks',
+    ];
+
     //ralationship
     public function phieuXuat()
     {

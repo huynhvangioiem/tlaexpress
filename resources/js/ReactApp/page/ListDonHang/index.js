@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { preareEditDonHang } from '../../actions/donhang';
+import { deleteDonHang, preareEditDonHang } from '../../actions/donhang';
 
 import DonHangList from '../../components/DonHangList';
 import { findIndex, showLocaleDonHang } from '../../config';
@@ -37,6 +37,8 @@ export default function ListDonHang(props) {
         newState.push(donHang);
       } 
       setDonHangs(newState);
+    }else{
+      setDonHangs([]);
     }
   }, [dataDonHang,dataUsers,dataDiemgs])
 
@@ -49,10 +51,9 @@ export default function ListDonHang(props) {
     navigate("/quan-ly-van-don/tao-don-hang");
   }
   const onDeleteDiemGd = (id) => {
-    console.log(id);
-    // if(confirm("Bạn có chắc chắn rằng muốn xóa điểm giao dịch này?")){
-    //   dispatch(deleteDiemGd(id));
-    // }
+    if(confirm("Bạn có chắc chắn rằng muốn xóa đơn hàng này?")){
+      dispatch(deleteDonHang(id.substring(2, id.length)));
+    }
   }
 
   return (

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChuyenHangController;
 use App\Http\Controllers\DiemGDController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\LoginController;
@@ -28,3 +29,4 @@ Route::post("auth/unlock/{id}",[UserColtroller::class,'unLockUser'])->middleware
 Route::apiResource("diemgd",DiemGDController::class)->middleware('auth:api');
 Route::apiResource("user",NhanVienController::class)->middleware('auth:api');
 Route::apiResource("donhang",DonHangController::class)->middleware('auth:api');
+Route::apiResource("chuyenhang",ChuyenHangController::class)->middleware('auth:api');

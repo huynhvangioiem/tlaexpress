@@ -79,6 +79,17 @@ export const Comfirm = (objCheck, checkValue, message) => {
   return true;
 }
 
+export const notIs = (objCheck, checkValue, message) => {
+  let inputElement = getInputElm(objCheck);
+  let errorElement = getErrorElm(inputElement);
+  if (inputElement.value === checkValue) {
+    errorElement.innerText = message || 'Dữ liệu không được trùng nhau!';
+    errorElement.parentElement.classList.add('invalid');
+    return false;
+  }
+  return true;
+}
+
 export const Max = (objCheck, checkValue, message) => {
   let inputElement = getInputElm(objCheck);
   let errorElement = getErrorElm(inputElement);

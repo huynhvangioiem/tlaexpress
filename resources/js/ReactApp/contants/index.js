@@ -48,3 +48,11 @@ export const cachLay = {
   0: "Giao đến địa chỉ người nhận",
   1: "Người nhận tự đến nhận hàng"
 }
+
+//chuyenHang
+export const trangThaiChuyenHang = {
+  0: 'Đã đặt lịch',
+  1: 'Đang vận chuyển',
+  2: 'Hoàn thành',
+  '-1': 'Đã hủy'
+};

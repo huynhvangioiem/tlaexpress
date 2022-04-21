@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addDonHang, cancleEdit } from '../../actions/donhang';
+import { addDonHang, cancleEdit, editDonHang } from '../../actions/donhang';
 import FormAddDonHang from '../../components/FormAddDonHang'
 
 
@@ -18,8 +18,7 @@ export default function AddDonHang(props) {
     dispatch(cancleEdit());
   }
   const handleEdit = (donHangData,id) => {
-    console.log(donHangData);
-    // dispatch(editDiemGD(diemgdData,id));
+    dispatch(editDonHang(donHangData,id));
   }
 
   return (

@@ -50,3 +50,29 @@ export const cancleEdit = () => ({
   type: types.cancleEditDonHang,
   payload: {}
 })
+//chinh sua thong tin don hang
+export const editDonHang = (donHangData, id) => ({
+  type: types.editDonHang,
+  payload: { donHangData, id }
+})
+export const editDonHangSuccess = (donHangData) => ({
+  type: types.editDonHangSuccess,
+  payload: donHangData[0]
+})
+export const editDonHangFailed = (error) => ({
+  type: types.editDonHangFailed,
+  payload: error
+})
+//xoa don hang
+export const deleteDonHang = (id) => ({
+  type: types.deleteDonHang,
+  payload: id,
+})
+export const deleteDonHangSuccess = (id) => ({
+  type: types.deleteDonHangSuccess,
+  payload: id,
+})
+export const deleteDonHangFailed = (error) => ({
+  type: types.deleteDonHangFailed,
+  payload: error,
+})

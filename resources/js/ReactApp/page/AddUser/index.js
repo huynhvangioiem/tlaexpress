@@ -25,7 +25,9 @@ const AddUser = (props) => {
 
   return (
     <div className={clsx("col-9 col-m-9 col-s-12")}>
-      { _.isEmpty(userEditting) ? <FormUser onSubmit={handleSubmit} /> :  <FormEditUser edit={handleEdit} cancleEdit={handleCancleEdit} userData={userEditting} onSubmit={handleSubmit} />}
+      {_.isEmpty(userEditting) ?
+        <FormUser onSubmit={handleSubmit} /> :
+        <FormEditUser edit={handleEdit} cancleEdit={handleCancleEdit} userData={userEditting} onSubmit={handleSubmit} />}
     </div>
   )
 }

@@ -3,8 +3,8 @@ import { call, put, takeLatest, fork, take } from 'redux-saga/effects';
 import _get from 'lodash/get';
 import { STATUS_CODE } from '../contants';
 import { back, go, push } from '@lagunovsky/redux-react-router'
-import { addDonHang, getDonHang, getDonHangs } from '../api/donHang';
-import { addDonHangFailed, addDonHangSuccess, getDonHangFailed, getDonHangsFailed, getDonHangsSuccess, getDonHangSuccess } from '../actions/donhang';
+import { addDonHang, deleteDonHang, editDonHang, getDonHang, getDonHangs } from '../api/donHang';
+import { addDonHangFailed, addDonHangSuccess, deleteDonHangFailed, deleteDonHangSuccess, editDonHangFailed, editDonHangSuccess, getDonHangFailed, getDonHangsFailed, getDonHangsSuccess, getDonHangSuccess } from '../actions/donhang';
 
 function* processGetDonHangs() {
   while (true) {
@@ -28,7 +28,7 @@ function* processGetDonHang({ payload }) {
   // while (true) {
   // yield take(donHangTypes.getDonHangs);
   try {
-    const resp = yield call(getDonHang,payload);
+    const resp = yield call(getDonHang, payload);
     const { data, status } = resp;
     if (data.success) {
       yield put(getDonHangSuccess(data.success[0]));
@@ -58,12 +58,42 @@ function* processAddDonHang({ payload }) {
   }
 }
 
+function* processEditDonHang({ payload }) {
+  const { donHangData, id } = payload;
+  try {
+    const response = yield call(editDonHang, donHangData, id);
+    const { data, status } = response;
+    if (data.success) {
+      yield put(editDonHangSuccess(data.success))
+      yield put(back());
+    } else {
+      yield put(editDonHangFailed(data.error))
+    }
+  } catch (error) {
+    yield put(editDonHangFailed("Cập nhật thất bại, vui lòng thử lại!"))
+  }
+}
+
+function* processDeleteDonHang({payload}){
+  try {
+    const response = yield call(deleteDonHang,payload);
+    const {data, status} = response;
+    if(data.error){
+      yield put(deleteDonHangFailed(data.error))
+    }else{
+      yield put(deleteDonHangSuccess(payload))
+    }
+  } catch (error) {
+    yield put(deleteDonHangFailed("Không thể xóa đơn hàng này!"))
+  }
+}
+
 function* donHangSaga() {
   yield fork(processGetDonHangs);
   yield takeLatest(donHangTypes.addDonHang, processAddDonHang);
   yield takeLatest(donHangTypes.getDonHang, processGetDonHang);
-  // yield takeLatest(donHangTypes.editDiemGd, processEditDiemGD);
-  // yield takeLatest(donHangTypes.deleteDiemGd, processDeleteDiemGD);
+  yield takeLatest(donHangTypes.editDonHang, processEditDonHang);
+  yield takeLatest(donHangTypes.deleteDonHang, processDeleteDonHang);
 
 }
 export default donHangSaga

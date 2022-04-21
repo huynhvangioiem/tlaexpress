@@ -10,6 +10,11 @@ class LichTrinh extends Model
     use HasFactory;
     protected $table = 'lichtrinh';
     public $primaryKey = 'lt_id';
+    protected $fillable = [
+        'dgd_id',
+        'lt_loai',
+        'lt_thoigian'
+    ];
 
     //ralationship
     public function diemgd()

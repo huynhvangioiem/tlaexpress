@@ -11,6 +11,11 @@ class LichSuDonHang extends Model
     protected $table = 'lichsudonhang';
     public $primaryKey = 'lsdh_id';
 
+    protected $fillable = [
+        'dh_id',
+        'lsdh_vitri'
+    ];
+
     //ralationship
     public function donHang()
     {

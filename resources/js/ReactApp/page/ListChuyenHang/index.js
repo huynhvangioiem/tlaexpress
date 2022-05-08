@@ -52,7 +52,7 @@ export default function ListChuyenHang() {
   
   return (
     <div className={clsx("col-9 col-m-9 col-s-12")}>
-      <div className={clsx("container-fluid", style.listDonHang)}>
+      <div className={clsx("container-fluid", style.listChuyenHang)}>
         <div className={clsx("row")}>
           <div className={clsx("col-12 col-m-12 col-s-12", style.title)}>Danh sách đơn hàng</div>
           <ChuyenHangList  edit={onEditDiemGd} del={onDeleteDiemGd} >{chuyenHangs}</ChuyenHangList>

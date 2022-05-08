@@ -12,6 +12,11 @@ import donHangChiTietReducer from './donHangChiTiet';
 import donHangEdittingReducer from './donHangEditting';
 import chuyenHangReducer from './chuyenHang';
 import chuyenHangEdittingReducer from './chuyenHangEditting';
+import phieuXuatReducer from './phieuXuat';
+import phieuXuatEdittingReducer from './phieuXuatEditting';
+import phieuXuatChiTietReducer from './phieuXuatChiTiet';
+import giaoHangReducer from './giaoHang';
+import giaoHangChiTietReducer from './phieuGiaoChiTiet';
 
 const browserHistory = createBrowserHistory();
 
@@ -27,6 +32,13 @@ const rootReducer = combineReducers({
   donHangEditting : donHangEdittingReducer,
   chuyenHangs: chuyenHangReducer,
   chuyenHangEditting: chuyenHangEdittingReducer,
+  
+  phieuXuats: phieuXuatReducer,
+  phieuXuatEditting: phieuXuatEdittingReducer,
+  phieuXuatChiTiet: phieuXuatChiTietReducer,
+
+  giaoHangs: giaoHangReducer,
+  giaoHangChiTiet: giaoHangChiTietReducer,
 
 
   router: createRouterReducer(browserHistory),

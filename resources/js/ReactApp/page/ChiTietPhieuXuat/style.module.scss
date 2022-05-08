@@ -1,0 +1,25 @@
+.chiTietPhieuXuat {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding-bottom: 15px;
+  background-color: #fff;
+  .title, .formAdd {
+    background-color: #f7f7f7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    align-items: center; 
+  }
+  .title{
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .formAdd{
+    
+  }
+  .action{
+    margin-top: 10px;
+    button:not(:last-child){
+      margin-right: 15px;
+    }
+  }
+}

@@ -25,7 +25,7 @@ export const StatusDiemGd = {
 
 //donHang
 export const trangThaiDonHang = {
-  0: 'Đã tạo đơn',
+  // 0: 'Đã tạo đơn',
   1: 'Đã nhập kho gửi',
   2: 'Đang vận chuyển',
   3: 'Đã đến kho phát',
@@ -38,7 +38,8 @@ export const trangThaiDonHang = {
 };
 export const viTriDonHang = {
   'KH': "Kho hàng ",
-  'CH': "Chuyến hàng "
+  'CH': "Chuyến hàng ",
+  'PX': "Phiếu xuất "
 };
 export const nguoiTraPvc = {
   0: "Người gửi",
@@ -56,3 +57,18 @@ export const trangThaiChuyenHang = {
   2: 'Hoàn thành',
   '-1': 'Đã hủy'
 };
+
+//phieuXuat
+export const trangThaiPhieuXuat = {
+  '-1': "Đã hủy",
+  '0': "Đã tạo",
+  '1': "Đã xuất",
+  '2': "Hoàn thành"
+};
+
+//giaoHang
+export const trangThaiGiaoHang = {
+  0: 'Đã tạo',
+  1: 'Đang giao',
+  2: 'Hoàn thành'
+}

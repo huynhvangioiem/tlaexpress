@@ -9,10 +9,9 @@ import style from './style.module.scss';
 
 export default function QLVanDon(props) {
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getDonHangs());
-  },[])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  // },[])
 
   return (
     <div className={clsx("row", style.mainContent)}>

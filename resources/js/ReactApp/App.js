@@ -15,6 +15,8 @@ import _ from 'lodash';
 import { AUTHORIZATION } from './contants';
 import { logout } from './actions/auth';
 import { getChuyenHangs } from './actions/chuyenHang';
+import { getDonHangs } from './actions/donhang';
+import { getPhieuXuats } from './actions/phieuXuat';
 
 
 export default function App() {
@@ -23,10 +25,13 @@ export default function App() {
   const [userLogin, setuserLogin] = useState({});
 
   useEffect(() => {
+    setuserLogin(loginData)
     dispatch(getUser());
     dispatch(getDiemGDs())
     dispatch(getChuyenHangs());
-    setuserLogin(loginData)
+    dispatch(getDonHangs());
+    dispatch(getPhieuXuats());
+
   },[]);
 
   const onLogout = () => {

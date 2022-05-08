@@ -1,0 +1,14 @@
+.mainContent {
+  min-height: calc(100vh - 100px - 75px);
+  align-content: flex-start;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: #F6FAFC;
+  .title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 24px;
+  }
+}

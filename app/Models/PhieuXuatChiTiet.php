@@ -11,6 +11,11 @@ class PhieuXuatChiTiet extends Model
     protected $table = 'phieuxuatchitiet';
     public $primaryKey = 'pxct_id';
 
+    protected $fillable = [
+        'px_id',
+        'dh_id'
+    ];
+
     //ralationship
     public function donHang()
     {

@@ -17,6 +17,15 @@ import QLChuyenHang from './page/QLChuyenHang'
 import QLNhap from './page/QLNhap'
 import ListChuyenHang from './page/ListChuyenHang'
 import AddChuyenHang from './page/AddChuyenHang'
+import AddXuat from './page/AddXuat'
+import ListXuat from './page/ListXuat'
+import ChiTietPhieuXuat from './page/ChiTietPhieuXuat'
+import ChiTietPhieuNhap from './page/ChiTietPhieuNhap'
+import ListNhap from './page/ListNhap'
+import QLGiao from './page/QLGiao'
+import ListGiao from './page/ListGiao'
+import AddGiao from './page/AddGiao'
+import ChiTietGiao from './page/ChiTietGiao'
 
 export default function Router() {
   return (
@@ -30,23 +39,23 @@ export default function Router() {
         <Route path="chi-tiet-don-hang" element={<ChiTietDonHang />} />
       </Route>
       <Route path="/quan-ly-xuat-kho/*" element={<QLXuat />}>
-        {/* <Route index element={<ListDonHang />} />
-        <Route path="tao-don-hang" element={<AddDonHang />} />
-        <Route path="danh-sach-don-hang" element={<ListDonHang />} />
-        <Route path="chi-tiet-don-hang" element={<ChiTietDonHang />} /> */}
+        <Route index element={<ListXuat />} />
+        <Route path="tao-phieu-xuat" element={<AddXuat />} />
+        <Route path="danh-sach-phieu-xuat" element={<ListXuat />} />
+        <Route path="chi-tiet-phieu-xuat" element={<ChiTietPhieuXuat />} />
       </Route>
       <Route path="/quan-ly-nhap-kho/*" element={<QLNhap />}>
-        {/* <Route index element={<ListDonHang />} />
-        <Route path="tao-don-hang" element={<AddDonHang />} />
-        <Route path="danh-sach-don-hang" element={<ListDonHang />} />
-        <Route path="chi-tiet-don-hang" element={<ChiTietDonHang />} /> */}
+        <Route index element={<ListNhap />} />
+        <Route path="chi-tiet-phieu-nhap" element={<ChiTietPhieuNhap />} />
       </Route>
       <Route path="/quan-ly-chuyen-hang/*" element={<QLChuyenHang />}>
         <Route index element={<ListChuyenHang />} />
-        
         <Route path="them-chuyen-hang" element={<AddChuyenHang />} />
         <Route path="danh-sach-chuyen-hang" element={<ListChuyenHang />} />
-        {/* <Route path="chi-tiet-don-hang" element={<ChiTietDonHang />} /> */}
+      </Route>
+      <Route path="/quan-ly-giao-hang/*" element={<QLGiao />}>
+        <Route index element={<ListGiao />} />
+        <Route path="chi-tiet-phieu-giao-hang" element={<ChiTietGiao />} />
       </Route>
       <Route path="/quan-ly-nguoi-dung/*" element={<QLUser />}>
         <Route index element={<ListUser />} />

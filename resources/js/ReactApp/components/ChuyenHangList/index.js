@@ -40,7 +40,7 @@ export default function ChuyenHangList(props) {
     },
     {
       key: "trangThai",
-      title: "Trạng thái",
+      title: "Trạng Thái",
       textAlign: 'right',
       // minWidth: "100px",
     },

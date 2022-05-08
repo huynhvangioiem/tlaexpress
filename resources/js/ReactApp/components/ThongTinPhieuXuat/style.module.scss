@@ -1,0 +1,16 @@
+.ThongTinPhieuXuat{
+  margin-top: 5px;
+  .info{
+    .title {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-transform: capitalize;
+      background-clip: border-box;
+      background-color: antiquewhite;
+    }
+  }
+  .infoItem {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}

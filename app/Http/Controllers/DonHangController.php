@@ -246,10 +246,6 @@ class DonHangController extends Controller
                 "success" => $donHang,
             ]);
         };
-
-
-
-
     }
 
     /**

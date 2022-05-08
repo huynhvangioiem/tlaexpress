@@ -28,6 +28,7 @@ const Cell = ({ column, record, idKey }) => {
   var style = {
     textAlign: column.textAlign ? column.textAlign : "",
     minWidth: column.minWidth ? column.minWidth : "",
+    maxWidth: column.maxWidth ? column.maxWidth : "",
   };
 
   if(key){

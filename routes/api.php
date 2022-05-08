@@ -3,9 +3,14 @@
 use App\Http\Controllers\ChuyenHangController;
 use App\Http\Controllers\DiemGDController;
 use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\GiaoHangController;
+use App\Http\Controllers\LichSuDonHangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NhanVienController;
+use App\Http\Controllers\PhieuXuatChiTietController;
+use App\Http\Controllers\PhieuXuatController;
 use App\Http\Controllers\UserColtroller;
+use App\Models\GiaoHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +31,11 @@ Route::post("auth/logout",[LoginController::class,'logout'])->name("logout")->mi
 Route::post("auth/lock/{id}",[UserColtroller::class,'lockUser'])->middleware('auth:api');
 Route::post("auth/unlock/{id}",[UserColtroller::class,'unLockUser'])->middleware('auth:api');
 
-Route::apiResource("diemgd",DiemGDController::class)->middleware('auth:api');
 Route::apiResource("user",NhanVienController::class)->middleware('auth:api');
+Route::apiResource("diemgd",DiemGDController::class)->middleware('auth:api');
 Route::apiResource("donhang",DonHangController::class)->middleware('auth:api');
 Route::apiResource("chuyenhang",ChuyenHangController::class)->middleware('auth:api');
+Route::apiResource("phieuxuat",PhieuXuatController::class)->middleware('auth:api');
+Route::apiResource("phieuxuatchitiet",PhieuXuatChiTietController::class)->only(['store'])->middleware('auth:api');
+Route::apiResource("lichsudonhang",LichSuDonHangController::class)->only(['store'])->middleware('auth:api');
+Route::apiResource("giaohang",GiaoHangController::class)->middleware('auth:api');

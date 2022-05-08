@@ -14,9 +14,10 @@ export default function Sidebar() {
     'Quản lý xuất kho',
     'Quản lý nhập kho',
     'Quản lý chuyến hàng',
+    'Quản lý giao hàng',
     'Quản lý người dùng',
     'Quản lý điểm giao dịch',
-    'Thống kê',
+    // 'Thống kê',
   ]
   return (
     <div className={clsx("col-2 col-m-1 col-s-0",style.sidebar,style.left)} id="left">

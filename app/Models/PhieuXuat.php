@@ -12,6 +12,14 @@ class PhieuXuat extends Model
     protected $table = 'phieuxuat';
     public $primaryKey = 'px_id';
 
+    protected $fillable = [
+        'px_thoigian',
+        'px_diemden',
+        'px_chuyenhang',
+        'px_nguoixuat',
+        'px_trangthai'
+    ];
+
     //ralationship
     public function phieuXuatChiTiet()
     {

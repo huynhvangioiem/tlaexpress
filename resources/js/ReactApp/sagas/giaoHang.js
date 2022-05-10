@@ -7,13 +7,14 @@ import { call, put, takeLatest, fork, take } from 'redux-saga/effects';
 import { STATUS_CODE } from '../contants';
 import { back, go, push } from '@lagunovsky/redux-react-router'
 import { addPhieuGiao, deletePhieuGiao, editPhieuGiao, getPhieuGiao, getPhieuGiaos } from '../api/phieuGiao.js';
-import { addPhieuGiaoFailed, addPhieuGiaoSuccess, deletePhieuGiaoFailed, deletePhieuGiaoSuccess, editPhieuGiaoFailed, editPhieuGiaoSuccess, exportPhieuGiaoFailed, exportPhieuGiaoSuccess, getPhieuGiaoFailed, getPhieuGiaosFailed, getPhieuGiaosSuccess, getPhieuGiaoSuccess } from '../actions/phieuGiao';
-import { addDonHangToPhieuGiaoChiTiet_Error_Cant, addPhieuGiaoFailedMsg, deletePhieuGiaoFailedMsg, editPhieuGiaoFailedMsg, getPhieuGiaosFailedMsg } from '../contants/toastMessage';
+import { addPhieuGiaoFailed, addPhieuGiaoSuccess, deletePhieuGiaoFailed, deletePhieuGiaoSuccess, getPhieuGiaoFailed, getPhieuGiaosFailed, getPhieuGiaosSuccess, getPhieuGiaoSuccess } from '../actions/phieuGiao';
+import { addPhieuGiaoFailedMsg, deletePhieuGiaoFailedMsg, getPhieuGiaosFailedMsg } from '../contants/toastMessage';
 // import { addPhieuGiaoChiTiet } from '../api/phieuGiaoChiTiet';
 import { editDonHang } from '../api/donHang';
 import dateFormat from 'dateFormat';
 import { addLichSuDonHang } from '../api/lichSuDonHang';
 import { toastError } from '../Helper/toastHelper';
+import { addGiaoHangChiTiet } from '../api/giaoHangChiTiet';
 
 
 function* processGetPhieuGiaos() {
@@ -85,13 +86,13 @@ function* processGiaoHang({ payload }) {
     for (let i = 0; i < maDonHangs.length; i++) {
       const maDH = maDonHangs[i];
       //1.1 add don hang to giaoHangChiTiet
-      const response1 = yield call(addPhieuGiaoChiTiet, { 'px_id': maPhieuGiao, 'dh_id': maDH });
+      const response1 = yield call(addGiaoHangChiTiet, { 'gh_id': maPhieuGiao, 'dh_id': maDH });
       if (response1.data.success) { //1.1 success => 1.2
         //1.2 update dh_trangthai and dh_vitri
-        const response2 = yield call(editDonHang, { 'dh_trangthai': 2, 'dh_vitri': "PX" + maPhieuGiao }, maDH);
+        const response2 = yield call(editDonHang, { 'dh_trangthai': 4 }, maDH);
         if (response2.data.success) { //if 1.2 success => 1.3
           // 1.3 add history of donHang
-          const response3 = yield call(addLichSuDonHang, { 'dh_id': maDH, 'lsdh_vitri': "PX" + maPhieuGiao });
+          const response3 = yield call(addLichSuDonHang, { 'dh_id': maDH, 'lsdh_vitri': "GH" + maPhieuGiao });
           if (response3.data.success) { //if 1.3 success
 
           } else { //1.3 failed
@@ -109,7 +110,7 @@ function* processGiaoHang({ payload }) {
     if (success) {
       const res = yield call(
         editPhieuGiao,
-        { 'px_thoigian': dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"), 'px_trangthai': 1 },
+        { 'gh_trangthai': 1 },
         maPhieuGiao
       );
       if (res.data.success) {
@@ -123,12 +124,23 @@ function* processGiaoHang({ payload }) {
   }
 }
 
+function* processDonHangSuccess({ payload }) {
+  try {
+    const response1 = yield call(editDonHang, { 'dh_trangthai': 5 }, payload);
+    const response2 = yield call(addLichSuDonHang, { 'dh_id': payload, 'lsdh_vitri': "Done" });
+    yield put(go(0));
+  } catch (error) {
+
+  }
+}
+
 function* phieuGiaoSaga() {
   yield fork(processGetPhieuGiaos);
   yield takeLatest(phieuGiaoTypes.getPhieuGiao, processGetPhieuGiao);
   yield takeLatest(phieuGiaoTypes.addPhieuGiao, processAddPhieuGiao);
   yield takeLatest(phieuGiaoTypes.deletePhieuGiao, processDeletePhieuGiao);
   yield takeLatest(phieuGiaoTypes.giaoHang, processGiaoHang);
+  yield takeLatest(phieuGiaoTypes.donHangSuccess, processDonHangSuccess);
 
 }
 export default phieuGiaoSaga

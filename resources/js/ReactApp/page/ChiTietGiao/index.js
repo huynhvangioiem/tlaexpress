@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import FormAddDonToGiao from '../../components/FormAddDonToGiao';
 import { AUTHORIZATION, trangThaiDonHang, trangThaiGiaoHang } from '../../contants';
 import style from './style.module.scss';
-import { getPhieuGiao, giaoHang } from '../../actions/phieugiao';
+import { donHangSuccess, getPhieuGiao, giaoHang } from '../../actions/phieugiao';
 import dateFormat from 'dateformat';
 import ThongTinPhieuGiao from '../../components/ThongTinPhieuGiao';
 import { addDonHangToGiao_Error_Cant, addDonHangToGiao_Error_NotFound, giao_Error_DonHangEmpty } from '../../contants/toastMessage';
@@ -67,6 +67,12 @@ export default function ChiTietGiao() {
             setDonHangs(donHangs);
           }
         }
+      } else {
+        giaoHangChiTietData.don_hang.forEach(dh => {
+          var donHangData = donHangsData[_.findIndex(donHangsData, function (donHang) { return donHang.dh_id == dh.dh_id })];
+          donHangs.push(donHangProcess(donHangData));
+        });
+        setDonHangs(donHangs);
       }
 
       /** Set giaoHangChiTiet to display */
@@ -119,9 +125,21 @@ export default function ChiTietGiao() {
   }
   const handleGiao = () => {
     if (!_.isEmpty(idDHs)) {
+      // console.log(giaoHangChiTietData.gh_id);
       dispatch(giaoHang(idDHs, giaoHangChiTietData.gh_id));
-      localStorage.removeItem("Giao"+ searchParams.get('gh'));
+      localStorage.removeItem("Giao" + searchParams.get('gh'));
     } else toastError(giao_Error_DonHangEmpty);
+  }
+  const handleDone = (maDH) => {
+    //get idDH and donHang
+    let idDH = maDH.substring(2, maDH.length);
+    let donHangData = donHangsData[_.findIndex(donHangsData, function (donHang) { return donHang.dh_id == idDH })];
+    if(donHangData.dh_trangthai == 5){
+      toastError("Hồi nãy giao rồi, giờ giao nữa. Điên à?");
+    }else
+    if (confirm("Đơn hàng đã giao thành công?")) {
+      dispatch(donHangSuccess(maDH.substring(2,maDH.length)));
+    }
   }
 
   //set data processing about donHangs and set giaoHangChiTiet.donHangs when donHangs change
@@ -149,7 +167,7 @@ export default function ChiTietGiao() {
           </div>
         </div>
         <div className={clsx("row")}>
-          <ThongTinPhieuGiao del={handleDelAdded} detail={handleDetail}>{giaoHangChiTiet}</ThongTinPhieuGiao>
+          <ThongTinPhieuGiao del={handleDelAdded} done={handleDone} detail={handleDetail}>{giaoHangChiTiet}</ThongTinPhieuGiao>
         </div>
         <div className={clsx("row", style.action)}>
           <div className={clsx("col-12 col-m-12 col-s-12")}>

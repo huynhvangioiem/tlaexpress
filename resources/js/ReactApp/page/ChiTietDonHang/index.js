@@ -35,25 +35,25 @@ export default function ChiTietDonHang() {
         'huongDanGiao': donHangChiTietData.dh_huongdangiao,
         'thuHo': numberFormat(donHangChiTietData.dh_thuho),
         'trangThai': trangThaiDonHang[donHangChiTietData.dh_trangthai],
-        'vitri': showLocaleDonHang(donHangChiTietData.dh_vitri,dataDiemgs),
+        'vitri': showLocaleDonHang(donHangChiTietData.dh_vitri, dataDiemgs),
         'ngayTao': dateFormat(donHangChiTietData.created_at),
         'nguoiTao': dataUsers[_.findIndex(dataUsers, function (o) { return o.user_name == donHangChiTietData.dh_nguoitao })].nv_ten,
 
         'tenGui': donHangChiTietData.dh_tengui,
         'sdtGui': donHangChiTietData.dh_sdtgui,
         'diaChiGui': `${donHangChiTietData.dh_diachigui}, ${showAddress(donHangChiTietData.dh_dvhcgui)}`,
-        
+
         'tenNhan': donHangChiTietData.dh_tennhan,
         'sdtNhan': donHangChiTietData.dh_sdtnhan,
         'diaChiNhan': `${donHangChiTietData.dh_diachinhan}, ${showAddress(donHangChiTietData.dh_dvhcnhan)}`,
-        
+
         'mota': donHangChiTietData.dh_mota,
         'trongLuong': numberFormat(donHangChiTietData.dh_trongluong),
-        
+
         'phiVanChuyen': numberFormat(donHangChiTietData.dh_phivanchuyen),
         'nguoiTra': nguoiTraPvc[donHangChiTietData.dh_nguoitra],
-        
-        'lichSuDonHang': showLichSuDonHang(donHangChiTietData.lich_su_don_hang,dataDiemgs)
+
+        'lichSuDonHang': showLichSuDonHang(donHangChiTietData.lich_su_don_hang, dataDiemgs)
       }
       setDonHangChiTiet(newState);
     }
@@ -71,8 +71,8 @@ export default function ChiTietDonHang() {
     </div>
   )
 }
-const showLichSuDonHang = (lichSuDonHangs,diemgds) => {
-  var result = lichSuDonHangs.map((lsdh)=>(<li key={lsdh.lsdh_id}>{dateFormat(lsdh.created_at)} - {showLocaleHistory(lsdh.lsdh_vitri,diemgds)}</li>))
+const showLichSuDonHang = (lichSuDonHangs, diemgds) => {
+  var result = lichSuDonHangs.map((lsdh) => (<li key={lsdh.lsdh_id}>{dateFormat(lsdh.created_at)} - {showLocaleHistory(lsdh.lsdh_vitri, diemgds)}</li>))
   return (<ul>{result}</ul>);
 }
 
@@ -80,9 +80,14 @@ export const showLocaleHistory = (locale, diemgd) => {
   const key = locale.substring(0, 2);
   const id = locale.substring(2, locale.length);
   const index = _.findIndex(diemgd, function (o) { return o.dgd_id == id });
-  if (key === 'KH') {
-    return 'Đã nhập ' + viTriDonHang[key] + diemgd[index].dgd_ten + ': ' + diemgd[index].dgd_diachi + ', ' + showAddress(diemgd[index].dgd_tinhHuyenXa);
-  } else {
-    return 'Đang vận chuyển trên ' + viTriDonHang[key] + locale;
+  switch (key) {
+    case 'KH':
+      return 'Đã nhập ' + viTriDonHang[key] + diemgd[index].dgd_ten + ': ' + diemgd[index].dgd_diachi + ', ' + showAddress(diemgd[index].dgd_tinhHuyenXa);
+    case 'PX':
+      return 'Đang vận chuyển trên ' + viTriDonHang[key] + locale;
+    case 'GH':
+      return 'Đơn hàng đang giao đến người nhận';
+    default:
+      break;
   }
 }

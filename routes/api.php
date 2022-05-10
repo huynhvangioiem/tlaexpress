@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChuyenHangController;
 use App\Http\Controllers\DiemGDController;
 use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\GiaoHangChiTietController;
 use App\Http\Controllers\GiaoHangController;
 use App\Http\Controllers\LichSuDonHangController;
 use App\Http\Controllers\LoginController;
@@ -39,3 +40,4 @@ Route::apiResource("phieuxuat",PhieuXuatController::class)->middleware('auth:api
 Route::apiResource("phieuxuatchitiet",PhieuXuatChiTietController::class)->only(['store'])->middleware('auth:api');
 Route::apiResource("lichsudonhang",LichSuDonHangController::class)->only(['store'])->middleware('auth:api');
 Route::apiResource("giaohang",GiaoHangController::class)->middleware('auth:api');
+Route::apiResource("giaohangchitiet",GiaoHangChiTietController::class)->only(['store'])->middleware('auth:api');

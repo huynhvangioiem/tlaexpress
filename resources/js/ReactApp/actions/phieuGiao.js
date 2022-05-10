@@ -6,8 +6,8 @@ import * as types from '../contants/phieuGiao.js';
 
 // lay danh sach phieu giao
 export const getPhieuGiaos = () => ({
-    type: types.getPhieuGiaos,
-    payload: null
+  type: types.getPhieuGiaos,
+  payload: null
 });
 export const getPhieuGiaosSuccess = (phieuGiaosData) => ({
   type: types.getPhieuGiaosSuccess,
@@ -24,12 +24,12 @@ export const getPhieuGiao = (id) => ({
   payload: id
 });
 export const getPhieuGiaoSuccess = (phieuGiaoData) => ({
-type: types.getPhieuGiaoSuccess,
-payload: phieuGiaoData
+  type: types.getPhieuGiaoSuccess,
+  payload: phieuGiaoData
 });
 export const getPhieuGiaoFailed = (error) => ({
-type: types.getPhieuGiaoFailed,
-payload: error
+  type: types.getPhieuGiaoFailed,
+  payload: error
 });
 
 //tao phieu giao
@@ -61,8 +61,13 @@ export const deletePhieuGiaoFailed = (error) => ({
   payload: error,
 })
 
-//giao hang
+// giao hang
 export const giaoHang = (maDonHangs,maPhieuGiao) => ({
   type: types.giaoHang,
   payload: {maDonHangs,maPhieuGiao},
+})
+
+export const donHangSuccess = (maDH) => ({
+  type: types.donHangSuccess,
+  payload: maDH,
 })

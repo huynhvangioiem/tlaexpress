@@ -113,7 +113,43 @@ class GiaoHangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //find and check the existence of giaoHang with $id
+        $giaoHang = GiaoHang::find($id);
+        // return error if gia$giaoHang is not existing
+        if (!$giaoHang) {
+            return response()->json([
+                "error" => "Phiếu giao hàng không tồn tại. Vui lòng kiểm tra lại mã phiếu!",
+            ]);
+        } else {
+            /**Update status of giaoHang*/
+            //Validate
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'gh_trangthai' => 'integer'
+                ],
+                [
+                    'integer' => ':attribute phải là số nguyên',
+                ],
+                [
+                    'gh_trangthai' => 'Trạng thái',
+                ]
+            );
+            //return validation result if error existing
+            if ($validator->fails()) {
+                return response()->json([
+                    'error' => $validator->errors()
+                ]);
+            }
+            //save data to database
+            $giaoHang->gh_trangthai = $request->gh_trangthai;
+            $giaoHang->save();
+            $ralationship = array("donHang:gh_id,dh_id");
+            $result = GiaoHang::with($ralationship)->where("gh_id", $giaoHang->gh_id)->get();
+            return response()->json([
+                "success" => $result,
+            ]);
+        }
     }
 
     /**

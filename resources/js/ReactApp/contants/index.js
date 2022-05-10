@@ -39,7 +39,8 @@ export const trangThaiDonHang = {
 export const viTriDonHang = {
   'KH': "Kho hàng ",
   'CH': "Chuyến hàng ",
-  'PX': "Phiếu xuất "
+  'PX': "Phiếu xuất ",
+  'GH': "Phiếu giao hàng "
 };
 export const nguoiTraPvc = {
   0: "Người gửi",

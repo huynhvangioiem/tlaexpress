@@ -16,3 +16,4 @@ export const deletePhieuGiao = "deletePhieuGiao";
 export const deletePhieuGiaoSuccess = "deletePhieuGiaoSuccess";
 export const deletePhieuGiaoFailed = "deletePhieuGiaoFailed";
 export const giaoHang = "giaoHang";
+export const donHangSuccess = "donHangSuccess";

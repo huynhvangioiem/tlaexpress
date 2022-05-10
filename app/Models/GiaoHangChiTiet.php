@@ -11,6 +11,11 @@ class GiaoHangChiTiet extends Model
     protected $table = 'giaohangchitiet';
     public $primaryKey = 'ghct_id';
 
+    protected $fillable = [
+        'dh_id',
+        'gh_id'
+    ];
+
     //ralationship
     public function donHang()
     {

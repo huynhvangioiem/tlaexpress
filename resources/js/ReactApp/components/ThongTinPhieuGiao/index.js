@@ -1,18 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import React, { memo } from 'react'
-import { trangThaiGiaoHang, trangThaiPhieuXuat } from '../../contants';
+import { trangThaiGiaoHang } from '../../contants';
 import DataTables from '../DataTables';
 import style from './style.module.scss';
 
 function ThongTinPhieuGiao(props) {
   const giaoHang = props.children;
-  const { del, detail } = props;
+  const { del, detail, done } = props;
   const handleDetails = (id) => {
     detail(id);
   }
   const handleDelete = (id) => {
     del(id);
+  }
+  const handleDone = (id) => {
+    done(id);
   }
   const columns = [
     {
@@ -72,6 +75,14 @@ function ThongTinPhieuGiao(props) {
               :
               ""
           }
+          {
+            giaoHang.trangThai == trangThaiGiaoHang[1] ?
+            <button type="button" onClick={e => handleDone(id)} className="btn btn-success">
+              <FontAwesomeIcon icon="fa-solid fa-circle-check" />
+            </button>
+            :
+            ""
+          }
         </>
       ),
       textAlign: "center",
@@ -107,7 +118,6 @@ function ThongTinPhieuGiao(props) {
         <div className={clsx("col-12 col-m-12 col-s-12", style.title)}>Danh sách đơn hàng</div>
         {giaoHang ? <DataTables dataTables={giaoHang.donHang} columns={columns} idKey="maDH" /> : ""}
       </div>
-
     </div>
   )
 }
